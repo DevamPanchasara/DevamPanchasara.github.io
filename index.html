@@ -326,6 +326,7 @@ nav {
   background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 24px; display: flex; flex-direction: column; gap: 10px;
   text-decoration: none; color: inherit; transition: all 0.3s; position: relative; overflow: hidden;
+  cursor: pointer;
 }
 .proj-card::after {
   content: ''; position: absolute; inset: 0;
@@ -354,89 +355,150 @@ nav {
 .proj-status-dot::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
 .proj-status-dot.orange { color: #fb923c; background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
 .proj-status-dot.orange::before { background: #fb923c; }
+.proj-status-dot.purple { color: var(--purple); background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.2); }
+.proj-status-dot.purple::before { background: var(--purple); }
 
 .proj-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; margin-top: 4px; }
 .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.65; flex: 1; }
 
-/* ─── SKILLS ─── */
-.skills-unified { display: flex; flex-direction: column; gap: 16px; }
-
-.skill-block-full { padding: 32px 36px; }
-.skills-all-grid {
+/* ─── SKILLS - REDESIGNED ─── */
+.skills-new-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 40px;
-}
-.skills-all-grid .skill-item { margin-bottom: 20px; }
-.skills-all-grid .skill-item:last-child,
-.skills-all-grid .skill-item:nth-last-child(2):nth-child(odd) { margin-bottom: 0; }
-
-.skill-block { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
-.skill-block-title { font-size: 13px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
-
-.skill-block-ai {
-  background: linear-gradient(135deg, rgba(79,143,255,0.06) 0%, rgba(0,212,180,0.04) 100%);
-  border: 1px solid rgba(79,143,255,0.18);
-  padding: 28px 32px;
-}
-.skill-ai-header {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;
-}
-.skill-ai-title {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em;
-}
-.skill-ai-icon { color: var(--teal); font-size: 16px; }
-.skill-ai-badge {
-  font-family: var(--mono); font-size: 10px; font-weight: 600;
-  color: var(--teal); background: rgba(0,212,180,0.1);
-  border: 1px solid rgba(0,212,180,0.25); padding: 3px 10px; border-radius: 100px;
-  letter-spacing: 0.08em; text-transform: uppercase;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.ai-tech-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+.skill-category-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 28px 24px;
+  transition: all 0.3s;
 }
-.ai-tech-card {
-  background: var(--glass2); border: 1px solid var(--border); border-radius: var(--radius2);
-  padding: 16px; display: flex; flex-direction: column; gap: 4px;
-  transition: all 0.25s;
+.skill-category-card:hover {
+  background: var(--glass2);
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
-.ai-tech-card:hover {
-  border-color: rgba(79,143,255,0.35); background: rgba(79,143,255,0.07);
-  transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-.ai-tech-icon { font-size: 22px; margin-bottom: 6px; }
-.ai-tech-name { font-size: 13px; font-weight: 700; color: var(--text); }
-.ai-tech-sub  { font-size: 11px; color: var(--text3); }
 
+.skill-cat-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.skill-cat-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+  flex-shrink: 0;
+}
+.skill-cat-icon.mobile { background: linear-gradient(135deg, rgba(79,143,255,0.25), rgba(0,212,180,0.15)); border: 1px solid rgba(79,143,255,0.3); }
+.skill-cat-icon.web    { background: linear-gradient(135deg, rgba(0,212,180,0.25), rgba(167,139,250,0.15)); border: 1px solid rgba(0,212,180,0.3); }
+.skill-cat-icon.backend{ background: linear-gradient(135deg, rgba(167,139,250,0.25), rgba(79,143,255,0.15)); border: 1px solid rgba(167,139,250,0.3); }
+.skill-cat-icon.cloud  { background: linear-gradient(135deg, rgba(251,146,60,0.25), rgba(0,212,180,0.1)); border: 1px solid rgba(251,146,60,0.3); }
+.skill-cat-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+
+/* Skill rows */
 .skill-item { margin-bottom: 18px; }
 .skill-item:last-child { margin-bottom: 0; }
-.skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-.skill-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.skill-pct { font-family: var(--mono); font-size: 12px; color: var(--text2); }
-.skill-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
-.skill-fill {
-  height: 100%; border-radius: 100px; width: 0;
-  background: linear-gradient(90deg, var(--blue), var(--teal));
-  transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+
+.skill-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px;
+}
+.skill-name { font-size: 13px; font-weight: 600; color: var(--text2); }
+.skill-pct  { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--teal); }
+
+/* Track + fill — pure CSS animation via custom property */
+.skill-track {
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 100px;
+  overflow: hidden;
   position: relative;
 }
-.skill-fill::after {
-  content: ''; position: absolute; right: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--teal); box-shadow: 0 0 10px var(--teal);
+
+.skill-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--teal) 100%);
+  /* width set inline via style attribute */
+  position: relative;
+  animation: barGrow 1.2s cubic-bezier(0.22,1,0.36,1) both;
+  transform-origin: left;
 }
 
-.ai-tools-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 20px; }
-.ai-chip {
-  background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius2);
-  padding: 16px 12px; text-align: center; transition: all 0.25s;
+@keyframes barGrow {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
-.ai-chip:hover { background: var(--glass2); border-color: rgba(79,143,255,0.3); transform: translateY(-2px); }
-.ai-chip-icon { font-size: 22px; margin-bottom: 8px; }
-.ai-chip-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.03em; }
+
+.skill-fill::after {
+  content: '';
+  position: absolute; right: -1px; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px 2px rgba(0,212,180,0.6);
+}
+
+/* AI Tools Section */
+.ai-section-card {
+  background: linear-gradient(135deg, rgba(79,143,255,0.06) 0%, rgba(0,212,180,0.04) 100%);
+  border: 1px solid rgba(79,143,255,0.18);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.ai-section-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;
+}
+.ai-section-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 18px; font-weight: 700; color: var(--text);
+}
+.ai-section-badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  color: var(--teal); background: rgba(0,212,180,0.1);
+  border: 1px solid rgba(0,212,180,0.25); padding: 4px 12px; border-radius: 100px;
+  letter-spacing: 0.08em;
+}
+
+.ai-chips-mega {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ai-chip-card {
+  background: var(--glass2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 12px; text-align: center;
+  transition: all 0.25s; cursor: default;
+}
+.ai-chip-card:hover {
+  border-color: rgba(79,143,255,0.4);
+  background: rgba(79,143,255,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.ai-chip-emoji { font-size: 26px; margin-bottom: 10px; }
+.ai-chip-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.ai-chip-sub { font-size: 10px; color: var(--text3); }
+
+/* Tech Badges Row */
+.tech-badges {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.tech-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 11px; color: var(--text2);
+  background: var(--glass); border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 8px; transition: all 0.2s;
+}
+.tech-badge:hover { color: var(--blue2); border-color: rgba(79,143,255,0.3); background: rgba(79,143,255,0.06); }
+.tech-badge .dot-sm { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-blue { background: var(--blue2); }
+.dot-teal { background: var(--teal); }
+.dot-purple { background: var(--purple); }
+.dot-orange { background: #fb923c; }
 
 /* ─── ABOUT ─── */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
@@ -459,31 +521,6 @@ nav {
 .stat-num .acc { color: var(--teal); }
 .stat-lbl { font-size: 12px; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
-.edu-cards { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-.edu-card {
-  padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  border-bottom: 1px solid var(--border2); transition: background 0.2s;
-}
-.edu-card:last-child { border-bottom: none; }
-.edu-card:hover { background: var(--glass2); }
-.edu-deg { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-.edu-uni { font-size: 12px; color: var(--text3); margin-bottom: 2px; }
-.edu-yr { font-family: var(--mono); font-size: 11px; color: var(--text3); }
-.edu-grade { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--teal); flex-shrink: 0; text-align: right; }
-.edu-grade small { display: block; font-size: 10px; color: var(--text3); font-weight: 400; font-family: var(--sans); }
-
-.ach-list { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-.ach-item {
-  display: flex; align-items: center; gap: 14px; padding: 14px 20px;
-  border-bottom: 1px solid var(--border2); transition: background 0.2s;
-}
-.ach-item:last-child { border-bottom: none; }
-.ach-item:hover { background: var(--glass2); }
-.ach-emoji { font-size: 20px; flex-shrink: 0; }
-.ach-content {}
-.ach-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-.ach-sub { font-size: 12px; color: var(--text3); }
-
 /* ─── CONTACT ─── */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
@@ -499,7 +536,7 @@ nav {
   font-size: 13px; font-weight: 500; transition: all 0.25s;
 }
 .contact-link:hover { border-color: rgba(79,143,255,0.35); color: var(--text); background: rgba(79,143,255,0.07); transform: translateX(4px); }
-.contact-link-icon { font-size: 16px; flex-shrink: 0; }
+.contact-link-icon { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
 
 .contact-right { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; gap: 16px; }
 .info-table { display: flex; flex-direction: column; }
@@ -522,67 +559,12 @@ footer {
 .footer-copy { font-size: 13px; color: var(--text3); }
 .footer-copy span { color: var(--text2); font-weight: 600; }
 .footer-links { display: flex; gap: 20px; }
-.footer-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color 0.2s; font-weight: 500; }
+.footer-links a {
+  font-size: 13px; color: var(--text3); text-decoration: none;
+  transition: color 0.2s; font-weight: 500;
+  display: flex; align-items: center; gap: 6px;
+}
 .footer-links a:hover { color: var(--text); }
-
-/* ─── SCROLL REVEAL ─── */
-.reveal { opacity: 1; transform: none; }
-
-/* Card entrance animations */
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.edu-card-anim { animation: cardIn 0.5s ease both; }
-.ach-card-anim { animation: cardIn 0.5s ease both; }
-
-/* All glass cards get a subtle fade-in when section is entered */
-.exp-card, .proj-card, .proj-featured-card, .skill-block,
-.about-text-block, .about-right, .contact-left, .contact-right,
-.stat-box, .edu-timeline-card, .ach-card {
-  opacity: 1;
-}
-/* Section headings always visible */
-.section-label, .section-title { opacity: 1; transform: none; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  nav { padding: 0 20px; }
-  .nav-links, .nav-cta { display: none; }
-  .hamburger { display: flex; }
-
-  .hero { padding: 100px 24px 60px; }
-  .hero-stats { gap: 24px; }
-
-  .section { padding: 60px 24px; }
-  .divider { margin: 0 24px; }
-
-  .exp-card { grid-template-columns: 1fr; gap: 16px; }
-  .exp-meta-mobile { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-
-  .proj-featured-card { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
-  .feat-visual { display: none; }
-
-  .proj-grid { grid-template-columns: 1fr 1fr; }
-
-  .skills-all-grid { grid-template-columns: 1fr; }
-  .ai-tech-grid { grid-template-columns: repeat(2, 1fr); }
-  .ai-tools-grid { grid-template-columns: repeat(2,1fr); }
-
-  .about-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-
-  footer { flex-direction: column; text-align: center; padding: 20px 24px; }
-}
-
-@media (max-width: 560px) {
-  .proj-grid { grid-template-columns: 1fr; }
-  .hero-title { font-size: 38px; }
-  .stats-row { grid-template-columns: 1fr 1fr; }
-  .skills-all-grid { grid-template-columns: 1fr; }
-  .ai-tech-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-stats { flex-direction: row; gap: 20px; justify-content: space-around; }
-}
 
 /* ─── EDUCATION SECTION ─── */
 .edu-timeline { display: flex; flex-direction: column; gap: 20px; }
@@ -620,40 +602,37 @@ footer {
   padding: 3px 10px; border-radius: 100px;
 }
 
-.edu-tl-score {
-  text-align: right; flex-shrink: 0;
-}
+.edu-tl-score { text-align: right; flex-shrink: 0; }
 .edu-tl-num { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .edu-tl-num.blue { color: var(--blue2); }
 .edu-tl-num.teal { color: var(--teal); }
 .edu-tl-num.purple { color: var(--purple); }
 .edu-tl-unit { font-size: 11px; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
 
-/* ─── FEATURED ACHIEVEMENT CARD ─── */
+/* ─── ACHIEVEMENTS ─── */
+.ach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
 .ach-card-featured {
   grid-column: 1 / -1;
   background: linear-gradient(135deg, rgba(66,133,244,0.1) 0%, rgba(0,212,180,0.08) 50%, rgba(52,168,83,0.07) 100%) !important;
   border: 1px solid rgba(66,133,244,0.35) !important;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
   padding: 32px 36px !important;
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  grid-template-rows: auto !important;
   gap: 0 48px !important;
   align-items: start;
+  border-radius: var(--radius);
+  transition: all 0.3s;
 }
 .ach-card-featured::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
   height: 3px;
   background: linear-gradient(90deg, #4285f4, #34a853, #fbbc04, #ea4335, #4285f4);
   background-size: 200%;
   animation: googleGrad 3s linear infinite;
 }
-@keyframes googleGrad {
-  0% { background-position: 0% } 100% { background-position: 200% }
-}
+@keyframes googleGrad { 0% { background-position: 0% } 100% { background-position: 200% } }
 .ach-card-featured::after {
   content: '';
   position: absolute; inset: 0;
@@ -666,7 +645,6 @@ footer {
   transform: translateY(-4px) !important;
 }
 
-/* Left column items */
 .ach-featured-top {
   grid-column: 1; grid-row: 1;
   display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
@@ -684,14 +662,9 @@ footer {
   padding: 5px 12px; border-radius: 100px;
   animation: giftPop 2s ease-in-out infinite;
 }
-@keyframes giftPop {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-}
-.ach-featured-icon-row {
-  grid-column: 1; grid-row: 2;
-  display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
-}
+@keyframes giftPop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+.ach-featured-icon-row { grid-column: 1; grid-row: 2; display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .ach-featured-icon {
   width: 64px; height: 64px; border-radius: 18px; font-size: 30px;
   display: flex; align-items: center; justify-content: center;
@@ -700,36 +673,16 @@ footer {
   box-shadow: 0 8px 24px rgba(66,133,244,0.2);
 }
 .ach-featured-stars { font-size: 16px; color: #fbbf24; letter-spacing: 2px; }
-
-.ach-featured-title {
-  grid-column: 1; grid-row: 3;
-  font-size: 24px; font-weight: 800; color: var(--text);
-  letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 6px;
-}
-.ach-featured-subtitle {
-  grid-column: 1; grid-row: 4;
-  font-family: var(--mono); font-size: 13px; color: #93c5fd;
-  margin-bottom: 16px;
-}
-.ach-featured-desc {
-  grid-column: 1; grid-row: 5;
-  font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 20px;
-}
+.ach-featured-title { grid-column: 1; grid-row: 3; font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 6px; }
+.ach-featured-subtitle { grid-column: 1; grid-row: 4; font-family: var(--mono); font-size: 13px; color: #93c5fd; margin-bottom: 16px; }
+.ach-featured-desc { grid-column: 1; grid-row: 5; font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 20px; }
 .ach-featured-desc strong { color: var(--text); }
-.ach-featured-chips {
-  grid-column: 1; grid-row: 6;
-  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
-}
-.ach-chip {
-  font-family: var(--mono); font-size: 11px; color: #93c5fd;
-  background: rgba(66,133,244,0.1); border: 1px solid rgba(66,133,244,0.25);
-  padding: 4px 10px; border-radius: 6px;
-}
+.ach-featured-chips { grid-column: 1; grid-row: 6; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.ach-chip { font-family: var(--mono); font-size: 11px; color: #93c5fd; background: rgba(66,133,244,0.1); border: 1px solid rgba(66,133,244,0.25); padding: 4px 10px; border-radius: 6px; }
 .ach-featured-link {
   grid-column: 1; grid-row: 7;
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 700;
-  color: var(--bg);
+  font-size: 13px; font-weight: 700; color: var(--bg);
   background: linear-gradient(135deg, #4285f4, #34a853);
   padding: 11px 24px; border-radius: 10px;
   text-decoration: none; transition: all 0.25s; width: fit-content;
@@ -737,19 +690,12 @@ footer {
 }
 .ach-featured-link:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(66,133,244,0.5); }
 
-/* Right column - visual showcase */
 .ach-card-featured .ach-featured-visual {
   grid-column: 2; grid-row: 1 / 8;
   display: flex; flex-direction: column; gap: 12px; justify-content: center;
 }
-.ach-visual-box {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 18px 20px;
-}
-.ach-visual-label {
-  font-family: var(--mono); font-size: 10px; color: var(--text3);
-  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px;
-}
+.ach-visual-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 20px; }
+.ach-visual-label { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
 .ach-visual-value { font-size: 15px; font-weight: 700; color: var(--text); }
 .ach-visual-value.highlight { color: #fbbf24; }
 .ach-badge-showcase {
@@ -759,50 +705,27 @@ footer {
 }
 .ach-badge-emoji { font-size: 48px; filter: drop-shadow(0 0 16px rgba(66,133,244,0.5)); animation: float 3s ease-in-out infinite; }
 .ach-badge-text { font-size: 12px; font-weight: 700; color: #93c5fd; letter-spacing: 0.05em; }
-.ach-badge-sub  { font-size: 11px; color: var(--text3); }
-
-@media (max-width: 900px) {
-  .ach-card-featured {
-    grid-template-columns: 1fr !important;
-  }
-  .ach-card-featured .ach-featured-visual { display: none; }
-  .ach-featured-top, .ach-featured-icon-row, .ach-featured-title,
-  .ach-featured-subtitle, .ach-featured-desc, .ach-featured-chips, .ach-featured-link {
-    grid-column: 1 !important;
-  }
-}
-.ach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ach-badge-sub { font-size: 11px; color: var(--text3); }
 
 .ach-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 28px; display: flex; flex-direction: column; gap: 16px;
-  transition: all 0.3s; position: relative; overflow: hidden;
-}
-.ach-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(79,143,255,0.04), rgba(0,212,180,0.04));
-  opacity: 0; transition: opacity 0.3s;
+  transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer;
 }
 .ach-card:hover { background: var(--glass2); border-color: rgba(255,255,255,0.14); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-.ach-card:hover::after { opacity: 1; }
-
 .ach-card-icon {
   width: 52px; height: 52px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center; font-size: 24px;
   border: 1px solid var(--border); flex-shrink: 0;
 }
-.ach-card-icon.google-cloud { background: linear-gradient(135deg, rgba(66,133,244,0.18), rgba(52,168,83,0.12)); }
-.ach-card-icon.google-py    { background: linear-gradient(135deg, rgba(234,179,8,0.18), rgba(239,68,68,0.12)); }
-.ach-card-icon.isro         { background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(79,143,255,0.12)); }
-
+.ach-card-icon.google-py { background: linear-gradient(135deg, rgba(234,179,8,0.18), rgba(239,68,68,0.12)); }
+.ach-card-icon.isro { background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(79,143,255,0.12)); }
 .ach-card-badge {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
   padding: 3px 10px; border-radius: 6px; align-self: flex-start;
 }
 .ach-card-badge.cert { background: rgba(0,212,180,0.1); color: var(--teal); border: 1px solid rgba(0,212,180,0.25); }
-.ach-card-badge.award { background: rgba(79,143,255,0.1); color: var(--blue2); border: 1px solid rgba(79,143,255,0.25); }
-
 .ach-card-title { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1.3; }
 .ach-card-issuer { font-size: 13px; color: var(--text2); line-height: 1.5; }
 .ach-card-link {
@@ -812,14 +735,47 @@ footer {
 }
 .ach-card-link:hover { gap: 10px; }
 
+/* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { padding: 100px 24px 60px; }
+  .hero-stats { gap: 24px; }
+
+  .section { padding: 60px 24px; }
+  .divider { margin: 0 24px; }
+
+  .exp-card { grid-template-columns: 1fr; gap: 16px; }
+  .proj-featured-card { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+  .feat-visual { display: none; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+
+  .skills-new-grid { grid-template-columns: 1fr; }
+  .ai-chips-mega { grid-template-columns: repeat(3, 1fr); }
+
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+
   .edu-timeline-card { grid-template-columns: auto 1fr; }
   .edu-tl-score { display: none; }
+
   .ach-grid { grid-template-columns: 1fr; }
+  .ach-card-featured { grid-template-columns: 1fr !important; }
+  .ach-card-featured .ach-featured-visual { display: none; }
+  .ach-featured-top, .ach-featured-icon-row, .ach-featured-title,
+  .ach-featured-subtitle, .ach-featured-desc, .ach-featured-chips, .ach-featured-link { grid-column: 1 !important; }
+
+  footer { flex-direction: column; text-align: center; padding: 20px 24px; }
 }
-@media (max-width: 600px) {
-  .ach-grid { grid-template-columns: 1fr; }
-  .edu-timeline-card { gap: 16px; }
+
+@media (max-width: 560px) {
+  .proj-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 38px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .ai-chips-mega { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { flex-direction: row; gap: 20px; justify-content: space-around; }
 }
 
 /* Scrollbar */
@@ -827,14 +783,11 @@ footer {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-
-/* Selection */
 ::selection { background: rgba(79,143,255,0.25); color: var(--text); }
 </style>
 </head>
 <body>
 
-<!-- AMBIENT -->
 <div class="ambient">
   <div class="ambient-blob blob1"></div>
   <div class="ambient-blob blob2"></div>
@@ -873,16 +826,15 @@ footer {
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Available for opportunities</div>
     <h1 class="hero-title">
       <span class="name">Devam<br></span>
       <span class="grad">Panchasara</span>
     </h1>
     <div class="hero-sub">
-      <span class="highlight">Software Engineer</span> &nbsp;·&nbsp; React Native &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; AI Era
+      <span class="highlight">Software Engineer</span> &nbsp;·&nbsp; Mobile App Development &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; AI Automation
     </div>
     <p class="hero-desc">
-      Building production-grade mobile & web applications with clean architecture and obsessive attention to UX. From shipping NPM SDKs to animating Swiggy's production app — I craft experiences that matter.
+      Building production-grade mobile &amp; web applications with clean architecture and obsessive attention to UX. From shipping NPM SDKs to animating Swiggy's production app, I craft experiences that matter.
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">View My Work</a>
@@ -918,8 +870,7 @@ footer {
   <h2 class="section-title">Experience</h2>
 
   <div class="exp-list">
-
-    <div class="exp-card reveal">
+    <div class="exp-card">
       <div>
         <div class="exp-period">Jan 2025 — Present</div>
         <div class="exp-type current">Current</div>
@@ -928,7 +879,7 @@ footer {
         <div class="exp-company">Brucira &amp; Ruttl</div>
         <div class="exp-role">React Native Developer</div>
         <div class="exp-desc">
-          Led development of a real-time in-app bug reporting SDK — screen/audio recording, live annotation, floating overlay UI, automated metadata capture, and background uploads. Published as a public NPM package with structured versioning. Built a full-scale local marketplace platform with live order tracking and vendor dashboards. Delivered high-performance UI animations for the Swiggy Seance app — live in production today.
+          Led development of a real-time in-app bug reporting SDK — screen/audio recording, live annotation, floating overlay UI, automated metadata capture, and background uploads. Published as a public NPM package with structured versioning. Built a full-scale local marketplace platform with live order tracking and vendor dashboards. Delivered high-performance UI animations for the Swiggy Seance app, live in production today.
         </div>
         <div class="tag-row">
           <span class="tag">React Native</span>
@@ -942,7 +893,7 @@ footer {
       </div>
     </div>
 
-    <div class="exp-card reveal">
+    <div class="exp-card">
       <div>
         <div class="exp-period">Feb 2023 — Jan 2025</div>
         <div class="exp-type past">Previous</div>
@@ -964,7 +915,7 @@ footer {
       </div>
     </div>
 
-    <div class="exp-card reveal">
+    <div class="exp-card">
       <div>
         <div class="exp-period">Jun 2022 — Jul 2022</div>
         <div class="exp-type past">Intern</div>
@@ -982,7 +933,6 @@ footer {
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -993,7 +943,7 @@ footer {
   <div class="section-label">Selected Work</div>
   <h2 class="section-title">Projects</h2>
 
-  <div class="proj-featured-card reveal">
+  <div class="proj-featured-card">
     <div>
       <div class="feat-eyebrow">🚀 NPM Package · Public</div>
       <div class="feat-title">Ruttl Bug Tracking SDK</div>
@@ -1005,60 +955,116 @@ footer {
         <span class="tag">Android Native</span>
         <span class="tag">NPM</span>
       </div>
-      <a href="#" class="btn-primary" style="font-size:13px;padding:11px 22px;display:inline-flex;">View on NPM ↗</a>
+      <a href="https://www.npmjs.com/package/@ruttl/bug-tracking" target="_blank" class="btn-primary" style="font-size:13px;padding:11px 22px;display:inline-flex;">View on NPM ↗</a>
     </div>
-    <div class="feat-visual">
-      <div class="feat-visual-bg"></div>
-      <div class="feat-visual-dots"></div>
-      <div class="feat-visual-emoji">🐛</div>
+    <div class="feat-visual" style="aspect-ratio:4/3;background:#0d0f18;border:1px solid rgba(255,255,255,0.08);border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px;">
+      <!-- Background glow -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(79,143,255,0.12) 0%,transparent 65%);"></div>
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(79,143,255,0.08) 1px,transparent 1px);background-size:18px 18px;"></div>
+
+      <!-- Mockup card -->
+      <div style="position:relative;z-index:2;width:100%;max-width:280px;display:flex;flex-direction:column;gap:10px;">
+
+        <!-- Ruttl header bar -->
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#4f8fff,#00d4b4);display:flex;align-items:center;justify-content:center;font-size:14px;">🔴</div>
+            <span style="font-family:'Fira Code',monospace;font-size:12px;font-weight:600;color:#f0f4ff;">ruttl</span>
+            <span style="font-size:10px;color:#4a5568;">bug-tracking</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+          </div>
+        </div>
+
+        <!-- Bug report item 1 -->
+        <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;animation:float 3s ease-in-out infinite;">
+          <div style="width:28px;height:28px;border-radius:7px;background:rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">🐛</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:11px;font-weight:700;color:#fca5a5;margin-bottom:2px;">NullPointerException</div>
+            <div style="font-size:10px;color:#4a5568;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">HomeScreen.jsx · line 142</div>
+            <div style="display:flex;gap:5px;margin-top:5px;">
+              <span style="font-size:9px;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);padding:2px 7px;border-radius:4px;">Critical</span>
+              <span style="font-size:9px;color:#4a5568;">Android 13</span>
+            </div>
+          </div>
+          <div style="width:6px;height:6px;border-radius:50%;background:#ef4444;box-shadow:0 0 6px #ef4444;flex-shrink:0;margin-top:4px;animation:pulse 2s infinite;"></div>
+        </div>
+
+        <!-- Bug report item 2 -->
+        <div style="background:rgba(251,146,60,0.07);border:1px solid rgba(251,146,60,0.2);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;animation:float 3s ease-in-out 1s infinite;">
+          <div style="width:28px;height:28px;border-radius:7px;background:rgba(251,146,60,0.18);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">📸</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:11px;font-weight:700;color:#fdba74;margin-bottom:2px;">Screen recording attached</div>
+            <div style="font-size:10px;color:#4a5568;">3.2MB · 00:14 duration</div>
+            <div style="display:flex;gap:5px;margin-top:5px;">
+              <span style="font-size:9px;background:rgba(251,146,60,0.12);color:#fdba74;border:1px solid rgba(251,146,60,0.25);padding:2px 7px;border-radius:4px;">In Review</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SDK badge -->
+        <div style="background:rgba(79,143,255,0.08);border:1px solid rgba(79,143,255,0.2);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:7px;">
+            <span style="font-size:13px;">📦</span>
+            <span style="font-family:'Fira Code',monospace;font-size:11px;color:#7eb3ff;">@ruttl/bug-tracking</span>
+          </div>
+          <span style="font-family:'Fira Code',monospace;font-size:10px;color:#00d4b4;">v1.0.4</span>
+        </div>
+
+      </div>
     </div>
   </div>
 
   <div class="proj-grid">
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="return false;" style="cursor:default;">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">🏪</div>
         <div class="proj-arrow">↗</div>
       </div>
-      <div><span class="proj-status-dot">Live</span></div>
+      <div><span class="proj-status-dot purple">Development</span></div>
       <div class="proj-name">Shop Local</div>
       <p class="proj-desc">Full-scale marketplace with monorepo — two mobile apps (vendor + customer) + admin panel on one backend. Live order tracking, native call-style alerts, inventory dashboards.</p>
       <div class="tag-row"><span class="tag">Expo</span><span class="tag">Next.js</span><span class="tag">GCP</span><span class="tag">NeonDB</span></div>
     </div>
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="window.open('https://swiggy.com','_blank')">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">⚡</div>
         <div class="proj-arrow">↗</div>
       </div>
-      <div><span class="proj-status-dot orange">Production</span></div>
+      <div><span class="proj-status-dot">Live</span></div>
       <div class="proj-name">Swiggy Seance</div>
       <p class="proj-desc">High-performance UI animations and advanced motion interactions inside the Swiggy app. Currently live in Swiggy production across millions of users.</p>
       <div class="tag-row"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Animations</span></div>
     </div>
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="return false;" style="cursor:default;">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">🚗</div>
         <div class="proj-arrow">↗</div>
       </div>
-      <div class="proj-name" style="margin-top:12px">Routzz Carpooling</div>
+      <div><span class="proj-status-dot purple">Development</span></div>
+      <div class="proj-name">Routzz Carpooling</div>
       <p class="proj-desc">Full-stack carpooling — chat, payments, live ride tracking, group rides. Complete lifecycle from system design to cloud deployment with admin analytics panel.</p>
       <div class="tag-row"><span class="tag">React Native</span><span class="tag">Supabase</span><span class="tag">AWS</span></div>
     </div>
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="window.open('https://bondvet.com','_blank')">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">🏥</div>
         <div class="proj-arrow">↗</div>
       </div>
-      <div class="proj-name" style="margin-top:12px">Shaip — Bond Vet</div>
+      <div><span class="proj-status-dot">Live</span></div>
+      <div class="proj-name">Shaip — Bond Vet</div>
       <p class="proj-desc">Scalable veterinary platform with real-time video consultations, secure auth, health dashboards, integrated chat, and multi-vet collaborative sessions.</p>
       <div class="tag-row"><span class="tag">Next.js</span><span class="tag">WebRTC</span><span class="tag">WebSockets</span></div>
     </div>
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.news.pracharapp','_blank')">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">📰</div>
         <div class="proj-arrow">↗</div>
@@ -1069,7 +1075,7 @@ footer {
       <div class="tag-row"><span class="tag">React Native</span><span class="tag">Supabase</span><span class="tag">WordPress</span></div>
     </div>
 
-    <div class="proj-card reveal">
+    <div class="proj-card" onclick="window.open('https://play.google.com/store/apps/details?id=com.abhiyaan.app&hl=en_IN','_blank')">
       <div class="proj-card-top">
         <div class="proj-icon-wrap">🏘️</div>
         <div class="proj-arrow">↗</div>
@@ -1085,103 +1091,161 @@ footer {
 
 <div class="divider"></div>
 
-<!-- SKILLS -->
+<!-- SKILLS - REDESIGNED -->
 <section class="section" id="skills">
   <div class="section-label">Technical Stack</div>
   <h2 class="section-title">Skills</h2>
 
-  <div class="skills-unified" id="skills-container">
-
-    <!-- All Skills in one unified block -->
-    <div class="skill-block skill-block-full">
-      <div class="skills-all-grid">
-
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">React Native / Expo</span><span class="skill-pct">95%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="95"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-pct">90%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="90"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">React / Next.js</span><span class="skill-pct">88%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="88"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Node.js / Express</span><span class="skill-pct">85%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="85"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">UI Animations</span><span class="skill-pct">85%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="85"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Firebase / Supabase</span><span class="skill-pct">82%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="82"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Strapi CMS</span><span class="skill-pct">82%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="82"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Android Native Modules</span><span class="skill-pct">78%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="78"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">MongoDB / NeonDB</span><span class="skill-pct">75%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="75"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">GCP / AWS</span><span class="skill-pct">72%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-w="72"></div></div>
-        </div>
-
+  <div class="skills-new-grid">
+    <!-- Mobile -->
+    <div class="skill-category-card">
+      <div class="skill-cat-header">
+        <div class="skill-cat-icon mobile">📱</div>
+        <div class="skill-cat-title">Mobile Development</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">React Native / Expo</span><span class="skill-pct">95%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:95%;animation-delay:0.1s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Android Native Modules</span><span class="skill-pct">78%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:78%;animation-delay:0.2s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">UI Animations & Motion</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:88%;animation-delay:0.3s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">App Store / Play Store</span><span class="skill-pct">82%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:82%;animation-delay:0.4s"></div></div>
       </div>
     </div>
 
-    <!-- AI & Tools Section -->
-    <div class="skill-block skill-block-ai">
-      <div class="skill-ai-header">
-        <div class="skill-ai-title">
-          <span class="skill-ai-icon">✦</span> AI &amp; Developer Tools
-        </div>
-        <span class="skill-ai-badge">New Era</span>
+    <!-- Frontend -->
+    <div class="skill-category-card">
+      <div class="skill-cat-header">
+        <div class="skill-cat-icon web">🌐</div>
+        <div class="skill-cat-title">Frontend & Web</div>
       </div>
-      <div class="ai-tech-grid">
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">🤖</div>
-          <div class="ai-tech-name">Claude AI</div>
-          <div class="ai-tech-sub">Anthropic</div>
-        </div>
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">🧠</div>
-          <div class="ai-tech-name">ChatGPT / GPT-4</div>
-          <div class="ai-tech-sub">OpenAI</div>
-        </div>
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">🔮</div>
-          <div class="ai-tech-name">Cursor AI</div>
-          <div class="ai-tech-sub">AI Code Editor</div>
-        </div>
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">💻</div>
-          <div class="ai-tech-name">GitHub Copilot</div>
-          <div class="ai-tech-sub">AI Pair Programmer</div>
-        </div>
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">⚡</div>
-          <div class="ai-tech-name">AI-Assisted Dev</div>
-          <div class="ai-tech-sub">Workflow Integration</div>
-        </div>
-        <div class="ai-tech-card">
-          <div class="ai-tech-icon">🌐</div>
-          <div class="ai-tech-name">LLM APIs</div>
-          <div class="ai-tech-sub">Integration & Prompting</div>
-        </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:90%;animation-delay:0.1s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">React / Next.js</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:88%;animation-delay:0.2s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">WebRTC / WebSockets</span><span class="skill-pct">76%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:76%;animation-delay:0.3s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Responsive & UX Design</span><span class="skill-pct">85%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:85%;animation-delay:0.4s"></div></div>
       </div>
     </div>
 
+    <!-- Backend -->
+    <div class="skill-category-card">
+      <div class="skill-cat-header">
+        <div class="skill-cat-icon backend">⚙️</div>
+        <div class="skill-cat-title">Backend & Databases</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Node.js / Express</span><span class="skill-pct">85%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:85%;animation-delay:0.1s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Firebase / Supabase</span><span class="skill-pct">82%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:82%;animation-delay:0.2s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">MongoDB / NeonDB / MySQL</span><span class="skill-pct">75%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:75%;animation-delay:0.3s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Strapi CMS / REST APIs</span><span class="skill-pct">82%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:82%;animation-delay:0.4s"></div></div>
+      </div>
+    </div>
+
+    <!-- Cloud & DevOps -->
+    <div class="skill-category-card">
+      <div class="skill-cat-header">
+        <div class="skill-cat-icon cloud">☁️</div>
+        <div class="skill-cat-title">Cloud & DevOps</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">GCP / AWS</span><span class="skill-pct">72%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:72%;animation-delay:0.1s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">NPM Package Publishing</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:88%;animation-delay:0.2s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Git / CI/CD Pipelines</span><span class="skill-pct">80%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:80%;animation-delay:0.3s"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Monorepo Architecture</span><span class="skill-pct">75%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:75%;animation-delay:0.4s"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI & Tools -->
+  <div class="ai-section-card">
+    <div class="ai-section-header">
+      <div class="ai-section-title">
+        <span>✦</span> AI &amp; Developer Tools
+      </div>
+      <span class="ai-section-badge">NEW ERA</span>
+    </div>
+
+    <div class="ai-chips-mega">
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">🤖</div>
+        <div class="ai-chip-name">Claude AI</div>
+        <div class="ai-chip-sub">Anthropic</div>
+      </div>
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">🧠</div>
+        <div class="ai-chip-name">ChatGPT / GPT-4o</div>
+        <div class="ai-chip-sub">OpenAI</div>
+      </div>
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">🔮</div>
+        <div class="ai-chip-name">Cursor AI</div>
+        <div class="ai-chip-sub">AI Code Editor</div>
+      </div>
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">💻</div>
+        <div class="ai-chip-name">GitHub Copilot</div>
+        <div class="ai-chip-sub">AI Pair Programmer</div>
+      </div>
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">🌐</div>
+        <div class="ai-chip-name">LLM API Integration</div>
+        <div class="ai-chip-sub">Prompting & Chains</div>
+      </div>
+      <div class="ai-chip-card">
+        <div class="ai-chip-emoji">⚡</div>
+        <div class="ai-chip-name">AI-Assisted Dev</div>
+        <div class="ai-chip-sub">Workflow Integration</div>
+      </div>
+    </div>
+
+    <div class="tech-badges">
+      <span class="tech-badge"><span class="dot-sm dot-blue"></span>Prompt Engineering</span>
+      <span class="tech-badge"><span class="dot-sm dot-teal"></span>RAG / Embeddings</span>
+      <span class="tech-badge"><span class="dot-sm dot-purple"></span>AI Code Review</span>
+      <span class="tech-badge"><span class="dot-sm dot-blue"></span>Generative UI</span>
+      <span class="tech-badge"><span class="dot-sm dot-orange"></span>AI Workflow Automation</span>
+      <span class="tech-badge"><span class="dot-sm dot-teal"></span>Context Management</span>
+      <span class="tech-badge"><span class="dot-sm dot-purple"></span>Multi-Model Orchestration</span>
+      <span class="tech-badge"><span class="dot-sm dot-blue"></span>AI-Enhanced Testing</span>
+    </div>
   </div>
 </section>
 
@@ -1193,16 +1257,16 @@ footer {
   <h2 class="section-title">About Me</h2>
 
   <div class="about-grid">
-    <div class="about-text-block reveal">
+    <div class="about-text-block">
       <div class="about-text">
         <p>I'm a <span class="hl">results-driven Software Engineer</span> focused on building scalable mobile and web applications. From concept to production, I obsess over clean architecture, UX quality, and performance.</p>
-        <p>Currently leading development at <span class="hl">Brucira & Ruttl</span> — shipping a public NPM SDK, contributing animations to <span class="hl2">Swiggy's production app</span>, and building full-scale marketplace platforms with real-time features.</p>
+        <p>Currently leading development at <span class="hl">Brucira &amp; Ruttl</span> — shipping a public NPM SDK, contributing animations to <span class="hl2">Swiggy's production app</span>, and building full-scale marketplace platforms with real-time features.</p>
         <p>I thrive where engineering precision meets product thinking. I care deeply about what gets shipped — not just whether it works, but whether it <span class="hl2">genuinely delights</span> the people using it.</p>
-        <p>Outside of code: passionate about <span class="hl">finance & trading</span>, love travelling, solving puzzles, chess, and exploring new technologies.</p>
+        <p>Outside of code: passionate about <span class="hl">finance &amp; trading</span>, love travelling, solving puzzles, chess, and exploring new technologies.</p>
       </div>
     </div>
 
-    <div class="about-right reveal">
+    <div class="about-right">
       <div class="stats-row">
         <div class="stat-box">
           <div class="stat-num">3<span class="acc">+</span></div>
@@ -1245,15 +1309,12 @@ footer {
   <h2 class="section-title">Education</h2>
 
   <div class="edu-timeline">
-
-    <div class="edu-timeline-card edu-card-anim" style="animation-delay:0.1s">
+    <div class="edu-timeline-card" style="animation-delay:0.1s">
       <div class="edu-icon-circle msc">🎓</div>
       <div class="edu-tl-body">
         <div class="edu-tl-degree">Master of Science — Information Technology</div>
         <div class="edu-tl-uni">Dhirubhai Ambani Institute of Information &amp; Communication Technology (DA-IICT), Gandhinagar</div>
-        <div style="margin-top:8px;">
-          <span class="edu-tl-period">Aug 2021 → Feb 2023</span>
-        </div>
+        <div style="margin-top:8px;"><span class="edu-tl-period">Aug 2021 → Feb 2023</span></div>
       </div>
       <div class="edu-tl-score">
         <div class="edu-tl-num blue">8.2</div>
@@ -1261,14 +1322,12 @@ footer {
       </div>
     </div>
 
-    <div class="edu-timeline-card edu-card-anim" style="animation-delay:0.2s">
+    <div class="edu-timeline-card" style="animation-delay:0.2s">
       <div class="edu-icon-circle bsc">📚</div>
       <div class="edu-tl-body">
         <div class="edu-tl-degree">Bachelor of Science — Computer Application &amp; IT</div>
         <div class="edu-tl-uni">K.S. School of Business Management, Gujarat University, Ahmedabad</div>
-        <div style="margin-top:8px;">
-          <span class="edu-tl-period">Aug 2018 → May 2021</span>
-        </div>
+        <div style="margin-top:8px;"><span class="edu-tl-period">Aug 2018 → May 2021</span></div>
       </div>
       <div class="edu-tl-score">
         <div class="edu-tl-num teal">8.3</div>
@@ -1276,21 +1335,18 @@ footer {
       </div>
     </div>
 
-    <div class="edu-timeline-card edu-card-anim" style="animation-delay:0.3s">
+    <div class="edu-timeline-card" style="animation-delay:0.3s">
       <div class="edu-icon-circle hs">🏫</div>
       <div class="edu-tl-body">
         <div class="edu-tl-degree">Higher Secondary — Science</div>
         <div class="edu-tl-uni">R.R School, Ahmedabad</div>
-        <div style="margin-top:8px;">
-          <span class="edu-tl-period">2017 → 2018</span>
-        </div>
+        <div style="margin-top:8px;"><span class="edu-tl-period">2017 → 2018</span></div>
       </div>
       <div class="edu-tl-score">
         <div class="edu-tl-num purple">81</div>
         <div class="edu-tl-unit">Percentage</div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1302,11 +1358,10 @@ footer {
   <h2 class="section-title">Achievements</h2>
 
   <div class="ach-grid">
-
-    <div class="ach-card ach-card-featured ach-card-anim" style="animation-delay:0.1s">
+    <div class="ach-card ach-card-featured">
       <div class="ach-featured-top">
         <div class="ach-google-badge">
-          <svg width="18" height="18" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" fill="#FFC107"/><path d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" fill="#FF3D00"/><path d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" fill="#4CAF50"/><path d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" fill="#1976D2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" fill="#FFC107"/><path d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" fill="#FF3D00"/><path d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" fill="#4CAF50"/><path d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" fill="#1976D2"/></svg>
           Google
         </div>
         <div class="ach-goodies-tag">🎁 Goodies Received</div>
@@ -1335,7 +1390,6 @@ footer {
         View Public Profile ↗
       </a>
 
-      <!-- Right column visual -->
       <div class="ach-featured-visual">
         <div class="ach-badge-showcase">
           <div class="ach-badge-emoji">☁️</div>
@@ -1357,22 +1411,21 @@ footer {
       </div>
     </div>
 
-    <div class="ach-card ach-card-anim" style="animation-delay:0.2s">
+    <a href="https://coursera.org/share/e13dff84b96c5691224e055a1cfbc795" target="_blank" class="ach-card" style="text-decoration:none;">
       <div class="ach-card-icon google-py">🐍</div>
       <span class="ach-card-badge cert">Certificate</span>
       <div class="ach-card-title">Google Python Course — Coursera</div>
       <div class="ach-card-issuer">Completed the "Crash Course on Python" offered by Google on Coursera. Covered Python fundamentals, data structures, and automation scripting.</div>
-      <a href="https://coursera.org/share/e13dff84b96c5691224e055a1cfbc795" target="_blank" class="ach-card-link">View Certificate →</a>
-    </div>
+      <span class="ach-card-link">View Certificate →</span>
+    </a>
 
-    <div class="ach-card ach-card-anim" style="animation-delay:0.3s">
+    <a href="https://drive.google.com/file/d/1onWQcDiMBTBDP6SvuPG1DEpHhtVVYH6e/view" target="_blank" class="ach-card" style="text-decoration:none;">
       <div class="ach-card-icon isro">🚀</div>
       <span class="ach-card-badge cert">Certificate</span>
       <div class="ach-card-title">ISRO Python Course Certificate</div>
       <div class="ach-card-issuer">Certified by the Indian Space Research Organisation (ISRO) for completing a Python programming course — one of India's most prestigious technical institutions.</div>
-      <a href="#" class="ach-card-link">View Certificate →</a>
-    </div>
-
+      <span class="ach-card-link">View Certificate →</span>
+    </a>
   </div>
 </section>
 
@@ -1384,33 +1437,44 @@ footer {
   <h2 class="section-title">Contact</h2>
 
   <div class="contact-grid">
-    <div class="contact-left reveal">
+    <div class="contact-left">
       <div class="contact-heading">Let's build something remarkable together.</div>
       <div class="contact-sub">// Open to full-time &amp; freelance opportunities</div>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#70141506111d00111e13181103110211414230171d11191c5e131f1d" class="contact-link">
-          <span class="contact-link-icon">📧</span> <span class="__cf_email__" data-cfemail="593d3c2f38342938373a31382a382b38686b193e34383035773a3634">[email&#160;protected]</span>
+        <a href="mailto:devampanchasara12@gmail.com" class="contact-link">
+          <span class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </span>
+          devampanchasara12@gmail.com
         </a>
         <a href="https://www.linkedin.com/in/devam-panchasara" target="_blank" class="contact-link">
-          <span class="contact-link-icon">🔗</span> linkedin.com/in/devam-panchasara
+          <span class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          linkedin.com/in/devam-panchasara
         </a>
-        <a href="https://github.com/DevamPanchasara" target="_blank" class="contact-link">
-          <span class="contact-link-icon">💻</span> github.com/DevamPanchasara
+        <a href="https://github.com/devam12" target="_blank" class="contact-link">
+          <span class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </span>
+          github.com/devam12
         </a>
         <a href="tel:+918154909268" class="contact-link">
-          <span class="contact-link-icon">📞</span> +91 81549 09268
+          <span class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          +91 81549 09268
         </a>
         <a href="https://drive.google.com/file/d/1xHRWUD5s9u33IehqjoNZcPxdr2EPIoG3/view" target="_blank" class="btn-primary" style="margin-top:8px;justify-content:center;">↓ Download Resume</a>
       </div>
     </div>
 
-    <div class="contact-right reveal">
+    <div class="contact-right">
       <div style="font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Quick Info</div>
       <div class="info-table">
         <div class="info-row"><span class="info-key">Location</span><span class="info-val">Ahmedabad, Gujarat, IN</span></div>
         <div class="info-row"><span class="info-key">Status</span><span class="info-val green">● Open to Work</span></div>
         <div class="info-row"><span class="info-key">Remote</span><span class="info-val">Yes</span></div>
-        <div class="info-row"><span class="info-key">Specialization</span><span class="info-val">Mobile First</span></div>
         <div class="info-row"><span class="info-key">Experience</span><span class="info-val">3+ Years</span></div>
         <div class="info-row"><span class="info-key">Response</span><span class="info-val">Within 24h</span></div>
       </div>
@@ -1429,9 +1493,18 @@ footer {
 <footer>
   <div class="footer-copy">© 2025 <span>Devam Panchasara</span>. Built with care.</div>
   <div class="footer-links">
-    <a href="https://github.com/DevamPanchasara" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/devam-panchasara" target="_blank">LinkedIn</a>
-    <a href="/cdn-cgi/l/email-protection#92f6f7e4f3ffe2f3fcf1faf3e1f3e0f3a3a0d2f5fff3fbfebcf1fdff">Email</a>
+    <a href="https://github.com/devam12" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/devam-panchasara" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="mailto:devampanchasara12@gmail.com">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Email
+    </a>
   </div>
 </footer>
 
@@ -1460,11 +1533,6 @@ function closeMenu() {
   hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
 }
 
-// Scroll reveal - simple and reliable
-document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-
-// Skill bars
-const skillObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.skill-fill').forEach(bar => { bar.style.width = bar.dataset.
+</script>
+</body>
+</html>
